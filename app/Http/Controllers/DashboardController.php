@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         
         // Get statistics
-        $stats = [
+        $stat = [
             'totalRequests' => ServiceRequest::where('user_id', $user->id)->count(),
             'pendingRequests' => ServiceRequest::where('user_id', $user->id)->where('status', 'pending')->count(),
             'completedRequests' => ServiceRequest::where('user_id', $user->id)->where('status', 'completed')->count(),
@@ -34,7 +34,7 @@ class DashboardController extends Controller
             ->get();
 
         return Inertia::render('dashboard', [
-            'stats' => $stats,
+            'stats' => $stat,
             'recentRequests' => $recentRequests,
         ]);
     }
